@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Login</title>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Cadastro</h2>
+    <form>
+      <div class="form-group">
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" required>
+      </div>
+      <div class="form-group">
+        <label for="sobrenome">Sobrenome</label>
+        <input type="text" id="sobrenome" name="sobrenome" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="telefone">Telefone</label>
+        <input type="tel" id="telefone" name="telefone" required>
+      </div>
+      <div class="form-group">
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" name="senha" required>
+      </div>
+      <div class="form-group">
+        <label for="confirmar-senha">Confirmar Senha</label>
+        <input type="password" id="confirmar-senha" name="confirmar-senha" required>
+      </div>
+      <div class="form-group">
+        <button type="submit">Cadastrar</button>
+      </div>
+    </form>
+  </div>
+<script>
+  const toggleBtn = document.getElementById('toggleBtn');
+  const sidebar = document.getElementById('sidebar');
+
+  toggleBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('expanded');
+  });
+
+  document.getElementById('form-container').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const formData = {
+        nome: document.getElementById('nome').value,
+        sobrenome: document.getElementById('sobrenome').value,
+        email: document.getElementById('email').value,
+        telefone: document.getElementById('telefone').value,
+        senha: document.getElementById('senha').value,
+        confirmarSenha: document.getElementById('confirmar-senha').value
+      };
+
+      fetch('http://localhost/api/cadastro', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert('Cadastro realizado com sucesso!');
+      })
+      .catch(error => {
+        console.error('Erro:', error);
+        alert('Erro ao cadastrar.');
+      });
+    });
+</script>
+</body>
+</html>
