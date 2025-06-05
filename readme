@@ -4,7 +4,7 @@ CREATE TABLE usuarios (
     senha_hash TEXT NOT NULL,
     nome VARCHAR(255) NOT NULL,
     telefone VARCHAR(20),
-    tipo_usuario VARCHAR(20) CHECK (tipo_usuario IN ('estudante', 'professor')) NOT NULL,
+    tipo_usuario ENUM('estudante', 'professor') NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 2. cursos
