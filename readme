@@ -1,3 +1,6 @@
+CREATE DATABASE autoriaweb;
+USE autoriaweb;
+
 CREATE TABLE usuarios (
     id SERIAL PRIMARY KEY,
     email VARCHAR(255) UNIQUE NOT NULL,
@@ -7,12 +10,7 @@ CREATE TABLE usuarios (
     tipo_usuario ENUM('estudante', 'professor') NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-2. cursos
-Criado por professores, com título e descrição.
 
-sql
-Copiar
-Editar
 CREATE TABLE cursos (
     id SERIAL PRIMARY KEY,
     professor_id INTEGER REFERENCES usuarios(id),
@@ -20,12 +18,7 @@ CREATE TABLE cursos (
     descricao TEXT,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-3. conteudos
-Vídeos, PDFs ou outros materiais de um curso.
 
-sql
-Copiar
-Editar
 CREATE TABLE conteudos (
     id SERIAL PRIMARY KEY,
     curso_id INTEGER REFERENCES cursos(id),
@@ -35,12 +28,7 @@ CREATE TABLE conteudos (
     url TEXT NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-4. favoritos
-Relaciona estudantes com cursos que eles marcaram como favoritos.
 
-sql
-Copiar
-Editar
 CREATE TABLE favoritos (
     id SERIAL PRIMARY KEY,
     estudante_id INTEGER REFERENCES usuarios(id),
@@ -48,12 +36,7 @@ CREATE TABLE favoritos (
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE(estudante_id, curso_id)
 );
-5. conteudos_salvos
-Permite que estudantes salvem conteúdos individuais para rever depois.
 
-sql
-Copiar
-Editar
 CREATE TABLE conteudos_salvos (
     id SERIAL PRIMARY KEY,
     estudante_id INTEGER REFERENCES usuarios(id),
